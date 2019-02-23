@@ -1,4 +1,4 @@
-package com.hhade.travelclock_20
+package com.yatochk.travelclock2
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

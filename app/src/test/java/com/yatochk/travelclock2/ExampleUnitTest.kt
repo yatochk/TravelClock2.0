@@ -1,4 +1,4 @@
-package com.hhade.travelclock_20
+package com.yatochk.travelclock2
 
 import org.junit.Test
 

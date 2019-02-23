@@ -1,6 +1,6 @@
-package com.hhade.travelclock_20.dagger.Components
+package com.yatochk.travelclock2.dagger.Components
 
-import com.hhade.travelclock_20.views.main.MainActivity
+import com.yatochk.travelclock2.views.main.MainActivity
 import dagger.Component
 
 @Component

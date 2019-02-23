@@ -1,4 +1,4 @@
-package com.hhade.travelclock_20.views
+package com.yatochk.travelclock2.views
 
 enum class MainState {
     Select,

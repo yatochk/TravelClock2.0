@@ -1,12 +1,12 @@
-package com.hhade.travelclock_20.views.main
+package com.yatochk.travelclock2.views.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.hhade.travelclock_20.R
-import com.hhade.travelclock_20.dagger.Components.DaggerAppComponent
-import com.hhade.travelclock_20.viewmodel.MainActivityViewModel
-import com.hhade.travelclock_20.views.MainState
+import com.yatochk.travelclock2.R
+import com.yatochk.travelclock2.dagger.Components.DaggerAppComponent
+import com.yatochk.travelclock2.viewmodel.MainActivityViewModel
+import com.yatochk.travelclock2.views.MainState
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
