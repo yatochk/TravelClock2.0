@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TravelClock_2.0</string>
+
+    <string name="titleSearch">Search</string>
+    <string name="titleSelect">Select</string>
+    <string name="titleOnWay">On Way</string>
+    <string name="titleAlarm">Alarm</string>
+    <string name="titleSettings">Settings</string>
 </resources>
