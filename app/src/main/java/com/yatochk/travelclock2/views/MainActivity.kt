@@ -2,51 +2,54 @@ package com.yatochk.travelclock2.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.maps.SupportMapFragment
 import com.yatochk.travelclock2.R
 import com.yatochk.travelclock2.dagger.Components.DaggerAppComponent
 import com.yatochk.travelclock2.viewmodel.MainActivityViewModel
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
     lateinit var viewModel: MainActivityViewModel
 
-    private val searchFragment = SearchFragment()
-    private val selectFragment = SelectFragment()
-    private val onWayFragment = OnWayFragment()
-    private val alarmFragment = AlarmFragment()
-    private val settingFragment = SettingsFragment()
+    private lateinit var travelFragmentManager: TravelFragmentManager
+    private lateinit var mapController: MapController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         DaggerAppComponent.create().injectMainActivity(this)
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        travelFragmentManager = TravelFragmentManager(supportFragmentManager, R.id.frame)
+
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync {
+            mapController = MapController(it)
+        }
 
         viewModel.state.observe(
             this,
             Observer {
                 when (it) {
                     MainState.Search -> {
-                        goToFragment(searchFragment, getString(R.string.titleSearch))
+                        travelFragmentManager.goTo(TravelFragments.SEARCH)
                     }
 
                     MainState.Select -> {
-                        goToFragment(selectFragment, getString(R.string.titleSelect))
+                        travelFragmentManager.goTo(TravelFragments.SELECT)
                     }
 
                     MainState.OnWay -> {
-                        goToFragment(onWayFragment, getString(R.string.titleOnWay))
+                        travelFragmentManager.goTo(TravelFragments.ON_WAY)
                     }
 
                     MainState.Alarm -> {
-                        goToFragment(alarmFragment, getString(R.string.titleAlarm))
+                        travelFragmentManager.goTo(TravelFragments.ALARM)
                     }
 
                     MainState.Settings -> {
-                        goToFragment(settingFragment, getString(R.string.titleSettings))
+                        travelFragmentManager.goTo(TravelFragments.SETTINGS)
                     }
 
                     else -> {
@@ -55,11 +58,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
-    }
-
-    private fun goToFragment(fragment: Fragment, name: String) {
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(name)
-            .replace(R.id.frame, fragment)
     }
 }

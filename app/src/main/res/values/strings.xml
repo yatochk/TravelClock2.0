@@ -6,4 +6,9 @@
     <string name="titleOnWay">On Way</string>
     <string name="titleAlarm">Alarm</string>
     <string name="titleSettings">Settings</string>
+    <string name="select_place">Here</string>
+
+    <string name="above_search_text">Where are we going?</string>
+
+    <string name="google_maps_key">AIzaSyB_e5ww_4zpoeCozu_Zb5pT1TjD5HRIL5M</string>
 </resources>
