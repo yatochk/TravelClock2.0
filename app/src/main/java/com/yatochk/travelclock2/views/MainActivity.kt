@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.SupportMapFragment
 import com.yatochk.travelclock2.R
-import com.yatochk.travelclock2.dagger.Components.DaggerAppComponent
+import com.yatochk.travelclock2.dagger.components.DaggerAppComponent
 import com.yatochk.travelclock2.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
