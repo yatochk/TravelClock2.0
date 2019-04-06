@@ -9,7 +9,7 @@ import androidx.room.Update
 interface SettingsDao {
 
     @Query("SELECT * FROM Settings")
-    fun getSettings()
+    fun getSettings(): Settings
 
     @Insert
     fun insertSettings(settings: Settings)
