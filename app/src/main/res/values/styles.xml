@@ -10,4 +10,17 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <style name="BaseCard" parent="CardView">
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">400dp</item>
+        <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
+        <item name="cardCornerRadius">24dp</item>
+    </style>
+
+    <style name="CardTitle" parent="Base.Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/titleTextColor</item>
+    </style>
 </resources>

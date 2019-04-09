@@ -3,7 +3,10 @@
 
     <string name="titleSearch">Search</string>
     <string name="titleSelect">Select</string>
+
     <string name="titleOnWay">On Way</string>
+    <string name="cancel_on_way">Cancel</string>
+
     <string name="titleAlarm">Alarm</string>
     <string name="titleSettings">Settings</string>
     <string name="select_place">Here</string>
