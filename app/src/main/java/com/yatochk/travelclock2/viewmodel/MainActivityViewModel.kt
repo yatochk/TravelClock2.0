@@ -11,5 +11,4 @@ class MainActivityViewModel @Inject constructor() : ViewModel() {
     private val mutableState = MutableLiveData<MainState>()
     val state: LiveData<MainState> = mutableState
 
-
 }
