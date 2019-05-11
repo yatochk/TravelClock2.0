@@ -9,5 +9,6 @@ data class Settings(
     val version: Int,
     val volume: Int,
     val distance: Int,
-    val vibration: Boolean
+    val vibration: Boolean,
+    val isFollow: Boolean
 )

@@ -1,13 +1,20 @@
 package com.yatochk.travelclock2.views
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.SupportMapFragment
 import com.yatochk.travelclock2.R
 import com.yatochk.travelclock2.dagger.components.DaggerAppComponent
+import com.yatochk.travelclock2.model.TravelDatabase
+import com.yatochk.travelclock2.model.TravelLocationManager
+import com.yatochk.travelclock2.utils.LOCATION_PERMISSION_CODE
 import com.yatochk.travelclock2.viewmodel.MainActivityViewModel
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var travelFragmentManager: TravelFragmentManager
     private lateinit var mapController: MapController
+    private lateinit var travelLocationManager: TravelLocationManager
+    private lateinit var travelDatabase: TravelDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +33,15 @@ class MainActivity : AppCompatActivity() {
         travelFragmentManager = TravelFragmentManager(supportFragmentManager, R.id.frame)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync {
-            mapController = MapController(it)
+        mapFragment.getMapAsync { googleMap ->
+            mapController = MapController(googleMap, travelDatabase)
+            mapController.setMoveListener { }
+            travelLocationManager.locationLiveData.observe(
+                this,
+                Observer { position ->
+                    mapController.changePosition(position)
+                }
+            )
         }
 
         viewModel.state.observe(
@@ -58,5 +74,38 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        travelLocationManager.startListening().also {
+            if (!it) {
+                requestLocationPermission()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        travelLocationManager.stopListening()
+    }
+
+    private fun requestLocationPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+            LOCATION_PERMISSION_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == LOCATION_PERMISSION_CODE && grantResults.size == 2) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                travelLocationManager.startListening()
+            } else {
+                requestLocationPermission()
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }
