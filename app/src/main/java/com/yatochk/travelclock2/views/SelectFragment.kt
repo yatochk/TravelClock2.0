@@ -8,6 +8,8 @@ import com.yatochk.travelclock2.R
 
 class SelectFragment : BaseFragment() {
 
+    override val TAG: String = SelectFragment::class.java.simpleName
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_select, container, false)
     }

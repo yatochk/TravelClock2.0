@@ -8,7 +8,13 @@ import com.yatochk.travelclock2.R
 
 class AlarmFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override val TAG: String = AlarmFragment::class.java.simpleName
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_alarm, container, false)
     }
 }

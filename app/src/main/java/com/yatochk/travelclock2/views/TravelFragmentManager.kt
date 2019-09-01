@@ -11,17 +11,10 @@ class TravelFragmentManager(private val fragmentManager: FragmentManager, @IdRes
     private val alarmFragment = AlarmFragment()
     private val settingFragment = SettingsFragment()
 
-    init {
+    private fun setCurrentFragment(fragment: BaseFragment) {
         fragmentManager.beginTransaction()
-            .add(containerViewId, settingFragment, TravelFragments.SETTINGS.name)
-            .hide(settingFragment)
-            .add(containerViewId, alarmFragment, TravelFragments.ALARM.name)
-            .hide(alarmFragment)
-            .add(containerViewId, onWayFragment, TravelFragments.ON_WAY.name)
-            .hide(onWayFragment)
-            .add(containerViewId, selectFragment, TravelFragments.SELECT.name)
-            .hide(selectFragment)
-            .add(containerViewId, searchFragment, TravelFragments.SEARCH.name)
+            .replace(containerViewId, fragment)
+            .addToBackStack(fragment.TAG)
             .commit()
     }
 
